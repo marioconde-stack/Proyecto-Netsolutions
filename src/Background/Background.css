@@ -1,0 +1,10 @@
+.fondo {
+    background: url('../Imagenes1/logo1.jpeg') no-repeat center center fixed;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0; 
+    left: 0;
+    z-index: -1;
+}
