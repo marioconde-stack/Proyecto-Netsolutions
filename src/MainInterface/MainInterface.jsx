@@ -1,13 +1,13 @@
-import React from 'react';
+      import React from 'react';
 import Sidebar from '../Sidebar/Sidebar';
 import './MainInterface.css';
 
-const MainInterface = ({ onLogout, usuario }) => {
+const MainInterface = ({ onLogout }) => {
   return (
     <div className="main-interface" id="sistema">
       <div className="topbar">
-        <strong>Usuario:</strong> {usuario?.usuario || 'Invitado'} &nbsp; | &nbsp;
-        <strong>Bodega:</strong> BOGOTÁ &nbsp; | &nbsp;
+        <strong>Usuario:</strong> MCONDEY &nbsp; | &nbsp; <strong>Bodega:</strong> BOGOTÁ
+        &nbsp; | &nbsp;
         <button
           onClick={onLogout}
           style={{
@@ -32,26 +32,4 @@ const MainInterface = ({ onLogout, usuario }) => {
 };
 
 export default MainInterface;
-  // Sidebar
-   // MenuItem.jsx
-      import React from 'react';
 
-const MenuItem = ({ item, isOpen, onToggle }) => {
-  return (
-    <li 
-      className={`menu-item ${isOpen ? 'open' : ''}`} 
-      onClick={item.submenu ? onToggle : undefined}
-    >
-      {item.icon} {item.name}
-      {item.submenu && (
-        <ul className="submenu">
-          {item.submenu.map((subItem, index) => (
-            <li key={index}>{subItem}</li>
-          ))}
-        </ul>
-      )}
-    </li>
-  );
-};
-
-export default MenuItem;
