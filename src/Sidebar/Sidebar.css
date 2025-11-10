@@ -1,4 +1,4 @@
-.sidebar {
+      .sidebar {
     width: 200px;
     background-color: #80defa;
     border-right: 2px solid #ccc;
@@ -52,3 +52,4 @@
     border-bottom: 1px solid #eee;
     font-size: 13px;
 }
+

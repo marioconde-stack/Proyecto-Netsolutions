@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+      import React, { useState } from 'react';
 import MenuItem from './MenuItem';
 import './Sidebar.css';
 
@@ -16,15 +16,15 @@ const Sidebar = () => {
       icon: '📥',
       submenu: ['Packing List', 'Estado', 'Fecha']
     },
-    { name: 'Referencias', icon: '🧾' },
-    { name: 'Separaciones', icon: '🔄' },
-    { name: 'Salidas', icon: '🚚' },
-    { name: 'Transferencias', icon: '🔁' },
-    { name: 'Movimientos Estiba', icon: '📦' },
-    { name: 'Consultas', icon: '🔍' },
-    { name: 'Inventarios Cíclicos', icon: '📋' },
-    { name: 'Opciones', icon: '⚙️' },
-    { name: 'Manual Usuario', icon: '📘' }
+    { name: 'Referencias', icon: '🧾',submenu: ['Packing List', 'Estado', 'Fecha'] },
+    { name: 'Separaciones', icon: '🔄',submenu: ['Packing List', 'Estado', 'Fecha'] },
+    { name: 'Salidas', icon: '🚚',submenu: ['Packing List', 'Estado', 'Fecha'] },
+    { name: 'Transferencias', icon: '🔁',submenu: ['Packing List', 'Estado', 'Fecha'] },
+    { name: 'Movimientos Estiba', icon: '📦',submenu: ['Packing List', 'Estado', 'Fecha'] },
+    { name: 'Consultas', icon: '🔍',submenu: ['Packing List', 'Estado', 'Fecha'] },
+    { name: 'Inventarios Cíclicos', icon: '📋',submenu: ['Packing List', 'Estado', 'Fecha'] },
+    { name: 'Opciones', icon: '⚙️',submenu: ['Packing List', 'Estado', 'Fecha'] },
+    { name: 'Manual Usuario', icon: '📘',submenu: ['Packing List', 'Estado', 'Fecha'] }
   ];
 
   return (
