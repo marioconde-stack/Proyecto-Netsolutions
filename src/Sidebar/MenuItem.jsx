@@ -1,16 +1,24 @@
-      import React from 'react';
+import React from 'react';
 
-const MenuItem = ({ item, isOpen, onToggle }) => {
+const MenuItem = ({ item, isOpen, onToggle, onSubmenuClick = () => {} }) => {
   return (
-    <li 
-      className={`menu-item ${isOpen ? 'open' : ''}`} 
+    <li
+      className={`menu-item ${isOpen ? 'open' : ''}`}
       onClick={item.submenu ? onToggle : undefined}
     >
       {item.icon} {item.name}
       {item.submenu && (
         <ul className="submenu">
           {item.submenu.map((subItem, index) => (
-            <li key={index}>{subItem}</li>
+            <li
+              key={index}
+              onClick={(e) => {
+                e.stopPropagation(); // evita cerrar el menú
+                onSubmenuClick(subItem); // ya nunca será undefined
+              }}
+            >
+              {subItem}
+            </li>
           ))}
         </ul>
       )}

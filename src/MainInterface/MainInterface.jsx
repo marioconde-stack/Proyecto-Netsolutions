@@ -4,25 +4,33 @@ import './MainInterface.css';
 
 const MainInterface = ({ onLogout, username, warehouse }) => {
   const [showConfirm, setShowConfirm] = useState(false);
+  const [showFactura, setShowFactura] = useState(false);
 
-  // Valores por defecto
   const displayUsername = username || 'Invitado';
   const displayWarehouse = warehouse || 'BOGOTÁ';
 
-  // Al hacer clic en “Cerrar sesión”
+  // ✅ Manejamos clics del Sidebar
+  const handleSubmenuClick = (submenu) => {
+    if (submenu === 'Factura') {
+      setShowFactura(true);
+    }
+  };
+
   const handleLogoutClick = () => {
     setShowConfirm(true);
   };
 
-  // Confirmar cierre de sesión
   const confirmLogout = () => {
     setShowConfirm(false);
     onLogout();
   };
 
-  // Cancelar cierre de sesión
   const cancelLogout = () => {
     setShowConfirm(false);
+  };
+
+  const closeFactura = () => {
+    setShowFactura(false);
   };
 
   return (
@@ -46,13 +54,15 @@ const MainInterface = ({ onLogout, username, warehouse }) => {
         </button>
       </div>
 
-      <Sidebar />
+      {/* Pasamos la función al Sidebar */}
+      <Sidebar onSubmenuClick={handleSubmenuClick} />
 
       <div className="content">
         <h1>Bienvenido a Netsolutions Web, {displayUsername}!</h1>
         <p>Seleccione una opción del menú para comenzar.</p>
       </div>
 
+      {/* Confirmación de cierre */}
       {showConfirm && (
         <div className="confirm-overlay">
           <div className="confirm-box">
@@ -60,6 +70,22 @@ const MainInterface = ({ onLogout, username, warehouse }) => {
             <div className="confirm-buttons">
               <button onClick={confirmLogout} className="btn-si">Sí</button>
               <button onClick={cancelLogout} className="btn-no">No</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* 🧾 Modal de factura */}
+      {showFactura && (
+        <div className="modal-overlay">
+          <div className="modal-box">
+            <div className="modal-header">
+              <h2>Factura</h2>
+              <button className="close-btn" onClick={closeFactura}>✖</button>
+            </div>
+
+            <div className="modal-content">
+              <p>Aquí irá la información o formulario de la factura.</p>
             </div>
           </div>
         </div>
