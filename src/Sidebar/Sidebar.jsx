@@ -1,22 +1,26 @@
 import React, { useState } from 'react';
 import MenuItem from './MenuItem';
 import FacturaModal from './FacturaModal';
+import DocumentoTransporteModal from './DocumentoTransporteModal';
+import FechaModal from './FechaModal';
 import './Sidebar.css';
 
 const Sidebar = () => {
   const [openMenu, setOpenMenu] = useState(null);
-  const [showFacturaModal, setShowFacturaModal] = useState(false);
+  const [activeModal, setActiveModal] = useState(null);
 
   const toggleMenu = (menuName) => {
     setOpenMenu(openMenu === menuName ? null : menuName);
   };
 
-  // Función para abrir el modal cuando se hace clic en "Factura"
+  // ✅ Abre el modal correspondiente
   const handleSubmenuClick = (subItem) => {
-    if (subItem === 'Factura') {
-      setShowFacturaModal(true);
-    }
+    if (subItem === 'Factura') setActiveModal('factura');
+    if (subItem === 'Docum. Transp.') setActiveModal('transporte');
+    if (subItem === 'Fecha') setActiveModal('fecha');
   };
+
+  const closeModal = () => setActiveModal(null);
 
   const menuItems = [
     { name: 'INICIO', icon: '🏠' },
@@ -51,7 +55,10 @@ const Sidebar = () => {
         ))}
       </ul>
 
-      {showFacturaModal && <FacturaModal onClose={() => setShowFacturaModal(false)} />}
+      {/* ✅ Mostrar los modales según el submenú clicado */}
+      {activeModal === 'factura' && <FacturaModal onClose={closeModal} />}
+      {activeModal === 'transporte' && <DocumentoTransporteModal onClose={closeModal} />}
+      {activeModal === 'fecha' && <FechaModal onClose={closeModal} />}
     </div>
   );
 };

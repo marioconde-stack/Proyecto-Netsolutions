@@ -2,6 +2,13 @@ import React from 'react';
 import './FacturaModal.css';
 
 const FacturaModal = ({ onClose }) => {
+
+  const handleSubmit = (e) => {
+    e.preventDefault(); // 🔥 Evita recargar la página
+    alert('Factura guardada correctamente ✅');
+    onClose(); // 🔒 Cierra el modal después de guardar
+  };
+
   return (
     <div className="factura-overlay">
       <div className="factura-box">
@@ -11,22 +18,25 @@ const FacturaModal = ({ onClose }) => {
         </div>
 
         <div className="factura-body">
-          <form className="factura-form">
+          <form className="factura-form" onSubmit={handleSubmit}>
             <label>
               Número de factura:
-              <input type="text" placeholder="Ej: F001-2025" />
+              <input type="text" placeholder="Ej: F001-2025" required />
             </label>
+
             <label>
               Cliente:
-              <input type="text" placeholder="Nombre del cliente" />
+              <input type="text" placeholder="Nombre del cliente" required />
             </label>
+
             <label>
               Fecha:
-              <input type="date" />
+              <input type="date" required />
             </label>
+
             <label>
               Total:
-              <input type="number" placeholder="0.00" />
+              <input type="number" placeholder="0.00" required />
             </label>
 
             <button type="submit" className="guardar-btn">Guardar</button>
