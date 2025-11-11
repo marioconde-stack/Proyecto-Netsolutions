@@ -26,6 +26,11 @@ const FechaModal = ({ onClose }) => {
             Concepto o proceso:
             <input type="text" placeholder="Ej: Recepción de mercancía" required />
           </label>
+          
+          <label>
+            Total Bultos:
+            <input type="number" placeholder="0.00" required />
+          </label>
 
           <button type="submit" className="guardar-btn">Guardar</button>
         </form>

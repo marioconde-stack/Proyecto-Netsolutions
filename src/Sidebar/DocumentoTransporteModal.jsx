@@ -33,6 +33,11 @@ const DocumentoTransporteModal = ({ onClose }) => {
           </label>
 
           <label>
+            Total Bultos:
+            <input type="number" placeholder="0.00" required />
+          </label>     
+
+          <label>
             Fecha de retiro:
             <input type="date" required />
           </label>

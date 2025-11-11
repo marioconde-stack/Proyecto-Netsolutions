@@ -35,7 +35,7 @@ const FacturaModal = ({ onClose }) => {
             </label>
 
             <label>
-              Total:
+              Total Bultos:
               <input type="number" placeholder="0.00" required />
             </label>
 
