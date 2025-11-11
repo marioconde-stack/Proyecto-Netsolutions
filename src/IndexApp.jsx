@@ -8,12 +8,20 @@ import './Background/Background.css';
 function IndexApp() {
   const [showLoginForm, setShowLoginForm] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState('Invitado');
 
-  const handleShowLogin = () => setShowLoginForm(true);
-  const handleCloseLogin = () => setShowLoginForm(false);
+  const handleShowLogin = () => {
+    setShowLoginForm(true);
+  };
 
-  const handleLogin = (event) => {
-    event.preventDefault();
+  const handleCloseLogin = () => {
+    setShowLoginForm(false);
+  };
+
+  // Nueva función que recibe directamente el usuario
+  const handleLoginSuccess = (username) => {
+    console.log('Login exitoso para usuario:', username);
+    setCurrentUser(username);
     setIsLoggedIn(true);
     setShowLoginForm(false);
   };
@@ -21,6 +29,7 @@ function IndexApp() {
   const handleLogout = () => {
     setIsLoggedIn(false);
     setShowLoginForm(false);
+    setCurrentUser('Invitado');
   };
 
   return (
@@ -32,10 +41,19 @@ function IndexApp() {
       )}
 
       {showLoginForm && !isLoggedIn && (
-        <LoginForm onClose={handleCloseLogin} onLogin={handleLogin} />
+        <LoginForm 
+          onClose={handleCloseLogin} 
+          onLoginSuccess={handleLoginSuccess} 
+        />
       )}
 
-      {isLoggedIn && <MainInterface onLogout={handleLogout} />}
+      {isLoggedIn && (
+        <MainInterface 
+          onLogout={handleLogout} 
+          username={currentUser}
+          warehouse="BOGOTÁ"
+        />
+      )}
     </div>
   );
 }

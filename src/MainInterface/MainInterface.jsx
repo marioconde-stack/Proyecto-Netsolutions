@@ -1,12 +1,17 @@
-      import React from 'react';
+import React from 'react';
 import Sidebar from '../Sidebar/Sidebar';
 import './MainInterface.css';
 
-const MainInterface = ({ onLogout }) => {
+const MainInterface = ({ onLogout, username, warehouse }) => {
+  // Asegurarnos de que siempre haya un valor
+  const displayUsername = username && username !== 'Invitado' ? username : 'Invitado';
+  const displayWarehouse = warehouse || 'BOGOTÁ';
+
   return (
     <div className="main-interface" id="sistema">
       <div className="topbar">
-        <strong>Usuario:</strong> MCONDEY &nbsp; | &nbsp; <strong>Bodega:</strong> BOGOTÁ
+        <strong>Usuario:</strong> {displayUsername} &nbsp; | &nbsp; 
+        <strong>Bodega:</strong> {displayWarehouse}
         &nbsp; | &nbsp;
         <button
           onClick={onLogout}
@@ -24,7 +29,7 @@ const MainInterface = ({ onLogout }) => {
       </div>
       <Sidebar />
       <div className="content">
-        <h1>Bienvenido a Netsolutions Web</h1>
+        <h1>Bienvenido a Netsolutions Web, {displayUsername}!</h1>
         <p>Seleccione una opción del menú para comenzar.</p>
       </div>
     </div>
