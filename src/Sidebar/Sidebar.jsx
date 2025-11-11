@@ -1,25 +1,32 @@
 import React, { useState } from 'react';
-import MenuItem from './MenuItem';
 import FacturaModal from './FacturaModal';
 import DocumentoTransporteModal from './DocumentoTransporteModal';
 import FechaModal from './FechaModal';
+import ConsultaModal from './ConsultaModal';
 import './Sidebar.css';
 
 const Sidebar = () => {
   const [openMenu, setOpenMenu] = useState(null);
   const [activeModal, setActiveModal] = useState(null);
 
+  // Abre o cierra un menú
   const toggleMenu = (menuName) => {
     setOpenMenu(openMenu === menuName ? null : menuName);
   };
 
-  // ✅ Abre el modal correspondiente
+  // ✅ Abre el modal correspondiente al submenú
   const handleSubmenuClick = (subItem) => {
     if (subItem === 'Factura') setActiveModal('factura');
     if (subItem === 'Docum. Transp.') setActiveModal('transporte');
     if (subItem === 'Fecha') setActiveModal('fecha');
   };
 
+  // ✅ Abre modal al hacer clic en “Consultas”
+  const handleMenuClick = (menuName) => {
+    if (menuName === 'Consultas') setActiveModal('consulta');
+  };
+
+  // ✅ Cierra el modal activo
   const closeModal = () => setActiveModal(null);
 
   const menuItems = [
@@ -45,20 +52,45 @@ const Sidebar = () => {
       <h2>NETSOLUTIONS WEB</h2>
       <ul>
         {menuItems.map((item, index) => (
-          <MenuItem
+          <li
             key={index}
-            item={item}
-            isOpen={openMenu === item.name}
-            onToggle={() => toggleMenu(item.name)}
-            onSubmenuClick={handleSubmenuClick}
-          />
+            className={`menu-item ${openMenu === item.name ? 'open' : ''}`}
+            onClick={() => {
+              if (item.name === 'Consultas') {
+                handleMenuClick(item.name); // ✅ Aquí se usa handleMenuClick
+              } else if (item.submenu) {
+                toggleMenu(item.name);
+              }
+            }}
+          >
+            <span className="icon">{item.icon}</span>
+            <span className="text">{item.name}</span>
+
+            {item.submenu && openMenu === item.name && (
+              <ul className="submenu">
+                {item.submenu.map((subItem, subIndex) => (
+                  <li
+                    key={subIndex}
+                    onClick={(e) => {
+                      e.stopPropagation(); // evita cerrar el menú
+                      handleSubmenuClick(subItem);
+                    }}
+                    className="submenu-item"
+                  >
+                    {subItem}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </li>   
         ))}
       </ul>
 
-      {/* ✅ Mostrar los modales según el submenú clicado */}
+      {/* ✅ Mostrar el modal activo */}
       {activeModal === 'factura' && <FacturaModal onClose={closeModal} />}
       {activeModal === 'transporte' && <DocumentoTransporteModal onClose={closeModal} />}
       {activeModal === 'fecha' && <FechaModal onClose={closeModal} />}
+      {activeModal === 'consulta' && <ConsultaModal onClose={closeModal} />}
     </div>
   );
 };
